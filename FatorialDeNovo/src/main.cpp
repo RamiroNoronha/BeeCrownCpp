@@ -46,6 +46,7 @@ int separatedDigit(int n, int p, int valueBefore){
 int main() {
     int n;
     while(std::cin >> n){
+        // Esse caso foi adicionado por causa do beeCrown
         if(n == 0){
             break;
         }
