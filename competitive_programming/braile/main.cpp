@@ -52,7 +52,7 @@ map<string, string> createMapBraille()
     braille["***..."] = "6";
     braille["****.."] = "7";
     braille["*.**.."] = "8";
-    braille[".*...."] = "9";
+    braille[".**..."] = "9";
     return braille;
 }
 
