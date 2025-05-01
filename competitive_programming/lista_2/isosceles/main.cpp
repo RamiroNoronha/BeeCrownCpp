@@ -1,4 +1,3 @@
-// max(left, right) + 1
 #include <iostream>
 #include <vector>
 #include <string>
