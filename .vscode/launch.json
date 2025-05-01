@@ -1,7 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -9,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/BeeCrownCpp/competitive_programming",
-      "program": "/workspaces/BeeCrownCpp/competitive_programming/build/Debug/outDebug",
+      "cwd": "/workspaces/BeeCrownCpp/competitive_programming/lista_1/report_retrieval",
+      "program": "/workspaces/BeeCrownCpp/competitive_programming/lista_1/report_retrieval/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
