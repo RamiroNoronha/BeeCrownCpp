@@ -8,16 +8,16 @@ using namespace std;
     ios_base::sync_with_stdio(0); \
     cin.tie(0);
 #define logs false
-int N, maxValue = 0;
+int n, maxValue = 0;
 vector<int> v, dp;
 
 // top-down approach generate stack over flow
 int compute_dp(int i)
 {
-    if (i < 0 || i >= N)
+    if (i < 0 || i >= n)
         return 0;
 
-    if (i == 0 || i == N - 1)
+    if (i == 0 || i == n - 1)
         return dp[i] = 1;
 
     if (dp[i] != 0)
@@ -37,9 +37,9 @@ int compute_dp(int i)
 
 void compute_dp_bottom_up()
 {
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < n; i++)
     {
-        if (i == 0 || i == N - 1)
+        if (i == 0 || i == n - 1)
         {
             dp[i] = 1;
             continue;
@@ -48,9 +48,9 @@ void compute_dp_bottom_up()
         dp[i] = min(dp[i - 1] + 1, v[i]);
     }
 
-    for (int i = N - 1; i >= 0; i--)
+    for (int i = n - 1; i >= 0; i--)
     {
-        if (i == 0 || i == N - 1)
+        if (i == 0 || i == n - 1)
             continue;
 
         dp[i] = min(dp[i + 1] + 1, dp[i]);
@@ -62,12 +62,12 @@ void compute_dp_bottom_up()
 int main()
 {
 
-    cin >> N;
+    cin >> n;
 
-    v = vector<int>(N);
-    dp = vector<int>(N, 0);
+    v = vector<int>(n);
+    dp = vector<int>(n, 0);
 
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < n; i++)
     {
         cin >> v[i];
     }
