@@ -9,7 +9,7 @@ using namespace std;
     cin.tie(0);
 #define logs false
 
-int N, T, K, R, maxValue;
+int n, T, K, R, maxValue;
 vector<int> X, Y;
 vector<vector<int>> dp;
 
@@ -42,7 +42,7 @@ int solve_top_down(int i, int j)
 void solve_bottom_up()
 {
     // The first for runs through the available items
-    for (int i = 1; i <= N; i++)
+    for (int i = 1; i <= n; i++)
     {
         int poweri = X[i - 1];
         int weigthi = Y[i - 1];
@@ -71,10 +71,10 @@ int main()
     cin >> T;
     while (T--)
     {
-        cin >> N;
-        X = vector<int>(N);
-        Y = vector<int>(N);
-        for (int i = 0; i < N; i++)
+        cin >> n;
+        X = vector<int>(n);
+        Y = vector<int>(n);
+        for (int i = 0; i < n; i++)
         {
             cin >> X[i] >> Y[i];
         }
@@ -84,7 +84,7 @@ int main()
 
         maxValue = -1;
         // Initialize the dp array with -1 if is top-down or 0 if is bottom-up
-        dp = vector<vector<int>>(N + 1, vector<int>(K + 1, 0));
+        dp = vector<vector<int>>(n + 1, vector<int>(K + 1, 0));
         solve_bottom_up();
 
         if (maxValue == -1)
