@@ -92,54 +92,46 @@ struct Dinitz
     }
 };
 
-int N,
-    M;
-vector<vector<int>> rGraph;
-vector<int> parent;
-
 int main()
 {
     _;
-
-    while (cin >> N >> M)
+    int N, M, T;
+    vector<int> values;
+    int u, v, c;
+    cin >> T;
+    while (T--)
     {
-        int num_vertices = N + M + 2;
-        Dinitz dinitz(num_vertices);
-        int s = 0;
-        int t = num_vertices - 1;
+        cin >> N >> M;
+        Dinitz d(N + M + 2);
+        values.clear();
+        values.resize(N + 1, 0);
+        int s = 0, t = N + M + 1;
+        int total = N + M;
+        for (int i = 1; i <= M; i++)
+        {
 
-        vector<int> categories_quantities(M);
-        long long sum = 0;
+            cin >> u >> v >> c;
+            d.add_edge(s, i, c);
+            d.add_edge(i, u + M, INF);
+            d.add_edge(i, v + M, INF);
+            cout << "Adding edge from " << s << " to " << i << " with capacity " << c << endl;
+            cout << "Adding edge from " << i << " to " << u + M << " with capacity INF" << endl;
+            cout << "Adding edge from " << i << " to " << v + M << " with capacity INF" << endl;
+            values[u]++;
+            values[v]++;
+        }
+
+        int sum = accumulate(values.begin(), values.end(), 0);
 
         for (int i = 1; i <= N; i++)
         {
-            int cost;
-            cin >> cost;
-            dinitz.add_edge(i, t, cost);
+            d.add_edge(i + M, t, values[i]);
+            cout << "Adding edge from " << i + M << " to " << t << " with capacity " << values[i] << endl;
         }
 
-        for (int i = 0; i < M; i++)
-            cin >> categories_quantities[i];
-
-        for (int i = 0; i < M; i++)
-        {
-            int benefit;
-            cin >> benefit;
-
-            int category_node = N + 1 + i;
-
-            sum += benefit;
-            dinitz.add_edge(s, category_node, benefit);
-
-            for (int j = 0; j < categories_quantities[i]; j++)
-            {
-                int vodka_type;
-                cin >> vodka_type;
-                dinitz.add_edge(category_node, vodka_type, INF);
-            }
-        }
-
-        cout << sum - dinitz.max_flow(s, t) << endl;
+        cout << d.max_flow(s, t) << endl;
+        cout << "sum: " << sum << endl;
     }
+
     return 0;
 }

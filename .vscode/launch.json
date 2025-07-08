@@ -5,11 +5,14 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": [],
+      "args": [
+        "<",
+        "/workspaces/BeeCrownCpp/competitive_programming/lista_4/jaida_jogo_multiplicativo/input.txt"
+      ],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/BeeCrownCpp/competitive_programming/lista_1/report_retrieval",
-      "program": "/workspaces/BeeCrownCpp/competitive_programming/lista_1/report_retrieval/build/Debug/outDebug",
+      "cwd": "/workspaces/BeeCrownCpp/competitive_programming/lista_4/jaida_jogo_multiplicativo",
+      "program": "/workspaces/BeeCrownCpp/competitive_programming/lista_4/jaida_jogo_multiplicativo/main",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
@@ -18,7 +21,7 @@
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
         }
-      ]
+      ],
     }
   ]
 }

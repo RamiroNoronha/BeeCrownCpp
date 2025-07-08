@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <numeric>
-
+#include <bits/stdc++.h>
 #define INF 0x3f3f3f3f
 #define _                         \
     ios_base::sync_with_stdio(0); \
@@ -92,54 +88,38 @@ struct Dinitz
     }
 };
 
-int N,
-    M;
-vector<vector<int>> rGraph;
-vector<int> parent;
-
 int main()
 {
     _;
-
-    while (cin >> N >> M)
+    int N, M, K;
+    vector<int> houselimit;
+    vector<vector<int>> horseAfinity;
+    int itr = 1;
+    int u, v;
+    int source, sink, c;
+    while (cin >> N >> M >> K)
     {
-        int num_vertices = N + M + 2;
-        Dinitz dinitz(num_vertices);
-        int s = 0;
-        int t = num_vertices - 1;
-
-        vector<int> categories_quantities(M);
-        long long sum = 0;
-
+        source = 0;
+        sink = N + M + 1;
+        Dinitz dinitz(N + M + 2);
         for (int i = 1; i <= N; i++)
         {
-            int cost;
-            cin >> cost;
-            dinitz.add_edge(i, t, cost);
+            cin >> c;
+            dinitz.add_edge(source, i, c);
         }
 
-        for (int i = 0; i < M; i++)
-            cin >> categories_quantities[i];
-
-        for (int i = 0; i < M; i++)
+        for (int i = 0; i < K; i++)
         {
-            int benefit;
-            cin >> benefit;
-
-            int category_node = N + 1 + i;
-
-            sum += benefit;
-            dinitz.add_edge(s, category_node, benefit);
-
-            for (int j = 0; j < categories_quantities[i]; j++)
-            {
-                int vodka_type;
-                cin >> vodka_type;
-                dinitz.add_edge(category_node, vodka_type, INF);
-            }
+            cin >> u >> v;
+            dinitz.add_edge(u, v + N, INF);
         }
 
-        cout << sum - dinitz.max_flow(s, t) << endl;
+        for (int i = 1; i <= M; i++)
+            dinitz.add_edge(i + N, sink, 1);
+
+        long long flow = dinitz.max_flow(0, N + M + 1);
+        cout << "Instancia " << itr++ << endl;
+        cout << flow << endl;
     }
     return 0;
 }

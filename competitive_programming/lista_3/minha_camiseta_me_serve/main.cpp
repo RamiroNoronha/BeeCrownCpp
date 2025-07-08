@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <numeric>
-
+#include <bits/stdc++.h>
 #define INF 0x3f3f3f3f
 #define _                         \
     ios_base::sync_with_stdio(0); \
@@ -92,54 +88,49 @@ struct Dinitz
     }
 };
 
-int N,
-    M;
-vector<vector<int>> rGraph;
-vector<int> parent;
-
 int main()
 {
     _;
+    string size1, size2;
+    int q, N, M, S, T, V, size1_index, size2_index, qtd_shirts;
+    cin >> q;
+    map<string, int> size_to_index;
 
-    while (cin >> N >> M)
+    while (q--)
     {
-        int num_vertices = N + M + 2;
-        Dinitz dinitz(num_vertices);
-        int s = 0;
-        int t = num_vertices - 1;
+        cin >> N >> M;
+        V = M + 8;
+        qtd_shirts = N / 6;
+        Dinitz dinitz(V);
+        S = 0;
+        T = M + 7;
 
-        vector<int> categories_quantities(M);
-        long long sum = 0;
+        size_to_index["XS"] = M + 1;
+        size_to_index["S"] = M + 2;
+        size_to_index["M"] = M + 3;
+        size_to_index["L"] = M + 4;
+        size_to_index["XL"] = M + 5;
+        size_to_index["XXL"] = M + 6;
 
-        for (int i = 1; i <= N; i++)
+        for (int i = 1; i <= M; i++)
         {
-            int cost;
-            cin >> cost;
-            dinitz.add_edge(i, t, cost);
+            cin >> size1 >> size2;
+            size1_index = size_to_index[size1];
+            size2_index = size_to_index[size2];
+            dinitz.add_edge(S, i, 1);
+            dinitz.add_edge(i, size1_index, INF);
+            dinitz.add_edge(i, size2_index, INF);
         }
 
-        for (int i = 0; i < M; i++)
-            cin >> categories_quantities[i];
-
-        for (int i = 0; i < M; i++)
+        for (const auto &item : size_to_index)
         {
-            int benefit;
-            cin >> benefit;
-
-            int category_node = N + 1 + i;
-
-            sum += benefit;
-            dinitz.add_edge(s, category_node, benefit);
-
-            for (int j = 0; j < categories_quantities[i]; j++)
-            {
-                int vodka_type;
-                cin >> vodka_type;
-                dinitz.add_edge(category_node, vodka_type, INF);
-            }
+            dinitz.add_edge(item.second, T, qtd_shirts);
         }
 
-        cout << sum - dinitz.max_flow(s, t) << endl;
+        string output = dinitz.max_flow(S, T) >= M ? "YES" : "NO";
+
+        cout << output << endl;
     }
+
     return 0;
 }
